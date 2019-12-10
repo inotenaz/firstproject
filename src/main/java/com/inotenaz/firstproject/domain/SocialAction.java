@@ -1,17 +1,20 @@
 package com.inotenaz.firstproject.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
-public class PhilanthropicOrganization implements Serializable {
+public class SocialAction implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,19 +22,23 @@ public class PhilanthropicOrganization implements Serializable {
 	private Integer id;
 	private String  name;
 	private String  description;
+	private Date 	date;
 	
-	@OneToMany(mappedBy="pho")
-	private List<SocialAction> socialActions = new ArrayList<>();
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="pho_id")
+	private PhilanthropicOrganization pho;
 	
-	public PhilanthropicOrganization() {
+	public SocialAction() {
 		
 	}
 
-	public PhilanthropicOrganization(Integer id, String name, String description) {
-		super();
+	public SocialAction(Integer id, String name, String description, Date date, PhilanthropicOrganization pho) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.date = date;
+		this.pho = pho;
 	}
 
 	public Integer getId() {
@@ -58,12 +65,21 @@ public class PhilanthropicOrganization implements Serializable {
 		this.description = description;
 	}
 
-	public List<SocialAction> getSocialActions() {
-		return socialActions;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setSocialActions(List<SocialAction> socialActions) {
-		this.socialActions = socialActions;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	
+	public PhilanthropicOrganization getPho() {
+		return pho;
+	}
+
+	public void setPho(PhilanthropicOrganization pho) {
+		this.pho = pho;
 	}
 
 	@Override
@@ -82,7 +98,7 @@ public class PhilanthropicOrganization implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PhilanthropicOrganization other = (PhilanthropicOrganization) obj;
+		SocialAction other = (SocialAction) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -90,7 +106,5 @@ public class PhilanthropicOrganization implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 	
 }
