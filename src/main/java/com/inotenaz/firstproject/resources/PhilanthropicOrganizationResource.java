@@ -22,11 +22,10 @@ public class PhilanthropicOrganizationResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<PhilanthropicOrganization> find(@PathVariable Integer id) {
-		
-		PhilanthropicOrganization obj = phiService.find(id);
-		return ResponseEntity.ok().body(obj);
-		
-	
+
+			PhilanthropicOrganization obj = phiService.find(id);
+			return ResponseEntity.ok().body(obj);
+
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

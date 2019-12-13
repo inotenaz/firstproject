@@ -35,7 +35,7 @@ public class FirstprojectApplication implements CommandLineRunner {
 		
 		phirepo.saveAll(Arrays.asList(phi1,phi2));
 		
-		SocialAction sa1 = new SocialAction(null,"barraca da felicidade", "doces em geral", null, phi1);
+		SocialAction sa1 = new SocialAction(null,"barraca da felicidade","doces em geral", null, phi1);
 		SocialAction sa2 = new SocialAction(null,"barraca da muita felicidade", "salgados em geral", null, phi1);
 		SocialAction sa3 = new SocialAction(null,"campanha alimetos", "alimentos em geral", null, phi2);
 		SocialAction sa4 = new SocialAction(null,"campanha vestuario", "vestuario em geral", null, phi2);
