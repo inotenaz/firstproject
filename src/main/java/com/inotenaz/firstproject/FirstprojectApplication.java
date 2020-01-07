@@ -1,6 +1,7 @@
 package com.inotenaz.firstproject;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.inotenaz.firstproject.domain.PhilanthropicOrganization;
 import com.inotenaz.firstproject.domain.SocialAction;
+import com.inotenaz.firstproject.domain.Volunteer;
 import com.inotenaz.firstproject.repositories.PhilanthropicOrganizationsRepository;
 import com.inotenaz.firstproject.repositories.SocialActionRepository;
+import com.inotenaz.firstproject.repositories.VolunteerRepository;
 
 @SpringBootApplication
 public class FirstprojectApplication implements CommandLineRunner {
@@ -21,6 +24,9 @@ public class FirstprojectApplication implements CommandLineRunner {
 	
 	@Autowired
 	private SocialActionRepository sarepo;
+	
+	@Autowired
+	private VolunteerRepository vrepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FirstprojectApplication.class, args);
@@ -42,6 +48,19 @@ public class FirstprojectApplication implements CommandLineRunner {
 		
 		sarepo.saveAll(Arrays.asList(sa1,sa2,sa3,sa4));
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		
+		Volunteer v1 = new Volunteer(null, "maria da silva","maria@gmail.com", "11111111111", sdf.parse("01/01/2000 00:00"));
+		Volunteer v2 = new Volunteer(null, "joao da silva","joao@gmail.com", "22222222222", sdf.parse("01/01/2001 00:00"));
+		Volunteer v3 = new Volunteer(null, "mario da silva","mario@gmail.com", "33333333333", sdf.parse("01/01/2002 00:00"));
+		Volunteer v4 = new Volunteer(null, "eduardo da silva","eduardo@gmail.com", "44444444444", sdf.parse("01/01/2003 00:00"));
+		Volunteer v5 = new Volunteer(null, "flavio da silva","flavio@gmail.com", "55555555555", sdf.parse("01/01/2004 00:00"));
+		
+		v1.getTelefones().addAll(Arrays.asList("21546545","19646515"));
+		v2.getTelefones().addAll(Arrays.asList("6165461","8654655"));
+		v3.getTelefones().addAll(Arrays.asList("849465416","19646515"));		
+		
+		vrepo.saveAll(Arrays.asList(v1,v2,v3,v4,v5));
 		
 	}
 
