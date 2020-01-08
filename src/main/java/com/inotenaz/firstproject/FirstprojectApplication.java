@@ -9,9 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.inotenaz.firstproject.domain.Action;
 import com.inotenaz.firstproject.domain.PhilanthropicOrganization;
 import com.inotenaz.firstproject.domain.SocialAction;
 import com.inotenaz.firstproject.domain.Volunteer;
+import com.inotenaz.firstproject.repositories.ActionRepository;
 import com.inotenaz.firstproject.repositories.PhilanthropicOrganizationsRepository;
 import com.inotenaz.firstproject.repositories.SocialActionRepository;
 import com.inotenaz.firstproject.repositories.VolunteerRepository;
@@ -27,6 +29,9 @@ public class FirstprojectApplication implements CommandLineRunner {
 	
 	@Autowired
 	private VolunteerRepository vrepo;
+	
+	@Autowired
+	private ActionRepository actionrepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FirstprojectApplication.class, args);
@@ -61,6 +66,15 @@ public class FirstprojectApplication implements CommandLineRunner {
 		v3.getTelefones().addAll(Arrays.asList("849465416","19646515"));		
 		
 		vrepo.saveAll(Arrays.asList(v1,v2,v3,v4,v5));
+		
+		Action ac1 = new Action(null,sa1,v1);
+		Action ac2 = new Action(null,sa2,v1);
+		Action ac3 = new Action(null,sa1,v2);
+		Action ac4 = new Action(null,sa2,v2);
+		
+		actionrepo.saveAll(Arrays.asList(ac1,ac2,ac3,ac4));
+		
+		
 		
 	}
 

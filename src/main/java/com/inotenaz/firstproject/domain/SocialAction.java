@@ -1,7 +1,9 @@
 package com.inotenaz.firstproject.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,6 +31,9 @@ public class SocialAction implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="pho_id")
 	private PhilanthropicOrganization pho;
+	
+	@OneToMany(mappedBy="idSocialAction")
+	private List<Action> actions = new ArrayList<>();
 	
 	public SocialAction() {
 		
@@ -73,13 +79,20 @@ public class SocialAction implements Serializable {
 		this.date = date;
 	}
 
-	
 	public PhilanthropicOrganization getPho() {
 		return pho;
 	}
 
 	public void setPho(PhilanthropicOrganization pho) {
 		this.pho = pho;
+	}
+
+	public List<Action> getActions() {
+		return actions;
+	}
+
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
 	}
 
 	@Override
@@ -106,5 +119,6 @@ public class SocialAction implements Serializable {
 			return false;
 		return true;
 	}
+
 	
 }
